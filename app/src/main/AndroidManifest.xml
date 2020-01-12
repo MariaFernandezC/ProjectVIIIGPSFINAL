@@ -5,7 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission	android:name="android.permission.ACCESS_FINE_LOCATION"	/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"	/>
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,13 +20,14 @@
         android:usesCleartextTraffic="true">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBjW4uytKcokmQ9cRgvppCDPFe29RfDxFA"/>
-        <activity android:name=".Perfil"></activity>
-        <activity android:name=".Reportes" />
-        <activity android:name=".localizacion" />
-        <activity android:name=".RegistroHijo" />
-        <activity android:name=".Bienvenido" />
-        <activity android:name=".Registro" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Perfil"
+            android:noHistory="true"></activity>
+        <activity android:name=".Reportes" android:noHistory="true" />
+        <activity android:name=".localizacion" android:noHistory="true" />
+        <activity android:name=".RegistroHijo" android:noHistory="true"/>
+        <activity android:name=".Bienvenido" android:noHistory="true" />
+        <activity android:name=".Registro" android:noHistory="true"/>
+        <activity android:name=".MainActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

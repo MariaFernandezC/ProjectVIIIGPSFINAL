@@ -8,15 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.projectviiigps.Others.Preferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static java.security.AccessController.getContext;
+
 public class RegistroHijo extends AppCompatActivity {
+
+    private EditText idpadre1;
+    private String id_padre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +38,24 @@ public class RegistroHijo extends AppCompatActivity {
         final EditText alergiah             = findViewById(R.id.RegistroAlergiaH);
         Button btnRegistro                  = findViewById(R.id.btnRegistroH);
 
+        final EditText codigo              = findViewById(R.id.RegistroCodigop);
+
+        id_padre = Preferences.obtenerPreferenceStringId(this,
+                Preferences.PREFERENCE_USUARIO_LOGIN_ID);
+        codigo.setText(id_padre);
+
+
+        Toast.makeText(this, "Id_padre: " + id_padre, Toast.LENGTH_LONG).show();
+
 
         btnRegistro.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View view) {
+                Intent i =getIntent();
+                /*final int id = i.getExtras().getInt("idpadre");
+                idpadre1.setText(Integer.toString(id));*/
                 String nombreh       = nombre.getText().toString();
                 String apellidoh       = apellido.getText().toString();
                 int    edadh         =  Integer.parseInt( edad.getText().toString());
@@ -73,7 +92,8 @@ public class RegistroHijo extends AppCompatActivity {
                         }
                     }
                 };
-                RegistroHijoRequest r = new RegistroHijoRequest(nombreh,apellidoh,edadh,direccionh,tiposangre, enfermedad, alergia, respuesta);
+                RegistroHijoRequest r = new RegistroHijoRequest( Integer.parseInt(id_padre),
+                        nombreh,apellidoh,edadh,direccionh,tiposangre, enfermedad, alergia, respuesta);
                 RequestQueue cola = Volley.newRequestQueue( RegistroHijo.this);
                 cola.add(r);
             }

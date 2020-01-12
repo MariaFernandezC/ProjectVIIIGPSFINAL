@@ -10,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,17 +24,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.projectviiigps.Others.Preferences;
 
 
-
-public class Bienvenido extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Bienvenido extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
     NavigationView navView;
     ConstraintLayout expandableView;
     Button arrowBtn;
     CardView cardView;
+    private TextView  codigo ;
+    Intent intent =getIntent();
+    int idpadre;
+    MenuItem logoutbtn;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -48,7 +55,8 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open
+                , R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -58,6 +66,8 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         MenuItem nav_camara = menu.findItem(R.id.menu_seccion_2);
         nav_camara.setVisible(true);
         navView.setNavigationItemSelectedListener(this);
+
+        logoutbtn = menu.findItem(R.id.btnlogout);
 
 
         View headView = navView.getHeaderView(0);
@@ -93,6 +103,37 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
             }
         });
 
+        logoutbtn.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Bienvenido.this);
+                alertDialogBuilder.setTitle("Importante");
+                alertDialogBuilder
+                        .setMessage("¿Deseas cerrar sesion?")
+                        .setCancelable(false)
+                        .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+
+                                Preferences.savePreferenceStringId(Bienvenido.this,"",
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_ID);
+                                Preferences.savePreferenceStringNombre(Bienvenido.this,"",
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+                                Preferences.savePreferenceStringContrasenia(Bienvenido.this,"",
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+                                Intent i = new Intent(Bienvenido.this,MainActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        }).create().show();
+                return false;
+            }
+        });
+
        // final TextView mensaje =(TextView)findViewById(R.id.name);
         Intent i = this.getIntent();
        // String nombre = i.getStringExtra("nombre");
@@ -105,6 +146,7 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         final TextView direccion1 =(TextView)findViewById(R.id.direccion);
         final TextView telefono1 =(TextView)findViewById(R.id.phoneNumber);
         final TextView correo1 =(TextView)findViewById(R.id.mailNumber);
+        codigo =(TextView)findViewById(R.id.codigopadre);//esto
 
 
         String nombre = i.getStringExtra("nombre");
@@ -112,11 +154,15 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         String direccion = i.getStringExtra("direccion");
         int telefono = i.getIntExtra("telefono", -1);
         String correo = i.getStringExtra("correo");
+        int idpadre=i.getIntExtra("idpadre",-1);//esto
 
         mensaje.setText(mensaje.getText()+"  " + nombre +"" + apellido + " ");
         direccion1.setText(direccion1.getText()+"  " + direccion);
         telefono1.setText(telefono1.getText()+" "+ telefono);
         correo1.setText(correo1.getText()+" "+ correo);
+        codigo.setText(codigo.getText()+" "+ idpadre);         //esto
+
+
 
 
     }
@@ -127,22 +173,35 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
 
         int id = item.getItemId();
 
-         if (id == R.id.menu_seccion_1) {
-             Intent i = new Intent(Bienvenido.this,Perfil.class);
-             startActivity(i);
+        if (id == R.id.menu_seccion_1) {
+            Intent i = new Intent(Bienvenido.this,Perfil.class);
+            startActivity(i);
         } else if (id == R.id.menu_seccion_2) {
-             Intent i = new Intent(Bienvenido.this,RegistroHijo.class);
-             startActivity(i);
+
+            Intent i = new Intent(Bienvenido.this,RegistroHijo.class);
+            int idp = i.getIntExtra("idpadre",-1);//esto
+            i.putExtra("idpadre",idpadre);
+            startActivity(i);
+
         } else if (id == R.id.menu_seccion_3) {
             Intent i = new Intent(Bienvenido.this,localizacion.class);
             startActivity(i);
         } else if (id == R.id.menu_seccion_4) {
-        Intent i = new Intent(Bienvenido.this,Reportes.class);
-        startActivity(i);
-    }
+            Intent i = new Intent(Bienvenido.this,Reportes.class);
+            startActivity(i);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-}
+    }
+
+    private void lanzarcodigo ()
+    {
+        Intent intent = new Intent(this,RegistroHijo.class);
+        intent.putExtra("idpadre",codigo.getText());
+        startActivity(intent);
+    }
+
+
 }

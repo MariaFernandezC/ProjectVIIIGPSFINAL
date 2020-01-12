@@ -69,7 +69,8 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
         btncargar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarnino("http://appgpsmovil.000webhostapp.com/webservices/datos.php?nombrenino=" + edtnombre.getText() + "");
+                buscarnino("http://appgpsmovil.000webhostapp.com/webservices/datos.php?nombrenino="
+                        + edtnombre.getText() + "");
 
             }
         });

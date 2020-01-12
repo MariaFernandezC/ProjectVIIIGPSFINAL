@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.projectviiigps.Others.Preferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,11 +31,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String user = Preferences.obtenerPreferenceStringNombre(this, Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+        String correo = Preferences.obtenerPreferenceStringId(this,Preferences.PREFERENCE_USUARIO_LOGIN_ID);
+        String pass = Preferences.obtenerPreferenceStringId(this,Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
+
         TextView registro= (TextView)findViewById(R.id.RegistroLogin);
         Button btnlogin = (Button)findViewById(R.id.btnLogin);
 
         final EditText usuarioT = (EditText)findViewById(R.id.edtUsuario);
         final EditText claveT = (EditText)findViewById(R.id.edtPassword);
+
         expandableView = findViewById(R.id.expandableView);
         arrowBtn = findViewById(R.id.arrowBtn);
         cardView = findViewById(R.id.cardView);
@@ -67,11 +74,21 @@ public class MainActivity extends AppCompatActivity {
 
                             if ( ok==true ){
 
+                                int idpadre1 = jsonRespuesta.getInt("idpadre");//esto
                                 String nombre = jsonRespuesta.getString("nombre");
                                 String apellido = jsonRespuesta.getString("apellido");
                                 String direccion = jsonRespuesta.getString("direccion");
                                 int telefono = jsonRespuesta.getInt("telefono");
                                 String correo = jsonRespuesta.getString("correo");
+
+                                Preferences.savePreferenceStringId(MainActivity.this,jsonRespuesta.getString("idpadre"),
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_ID);
+                                Preferences.savePreferenceStringNombre(MainActivity.this,
+                                        (jsonRespuesta.getString("nombre")+" "+ jsonRespuesta.getString("apellido")),
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+                                Preferences.savePreferenceStringContrasenia(MainActivity.this,
+                                        jsonRespuesta.getString("clave"),
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
 
                                 //int edad =jsonRespuesta.getInt("edad");
                                 Intent bienvenido = new Intent( MainActivity.this, Bienvenido.class);
@@ -80,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                 bienvenido.putExtra("direccion",direccion);
                                 bienvenido.putExtra("telefono",telefono);
                                 bienvenido.putExtra("correo",correo);
+                                bienvenido.putExtra("idpadre",idpadre1);
                                 MainActivity.this.startActivity(bienvenido);
                                 MainActivity.this.finish();
 
@@ -104,10 +122,13 @@ public class MainActivity extends AppCompatActivity {
                 LoginRequest r = new LoginRequest(usuario,clave, respuesta);
                 RequestQueue cola = Volley.newRequestQueue( MainActivity.this);
                 cola.add(r);
-
-
             }
 
         });
+
+
+
+
+
     }
 }
