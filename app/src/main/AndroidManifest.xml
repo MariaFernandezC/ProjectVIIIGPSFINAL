@@ -20,14 +20,13 @@
         android:usesCleartextTraffic="true">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBjW4uytKcokmQ9cRgvppCDPFe29RfDxFA"/>
-        <activity android:name=".Perfil"
-            android:noHistory="true"></activity>
-        <activity android:name=".Reportes" android:noHistory="true" />
-        <activity android:name=".localizacion" android:noHistory="true" />
-        <activity android:name=".RegistroHijo" android:noHistory="true"/>
-        <activity android:name=".Bienvenido" android:noHistory="true" />
-        <activity android:name=".Registro" android:noHistory="true"/>
-        <activity android:name=".MainActivity" android:noHistory="true">
+        <activity android:name=".Perfil"></activity>
+        <activity android:name=".Reportes" />
+        <activity android:name=".localizacion"  />
+        <activity android:name=".RegistroHijo"/>
+        <activity android:name=".Bienvenido" />
+        <activity android:name=".Registro"/>
+        <activity android:name=".MainActivity" android:noHistory="false" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

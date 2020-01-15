@@ -33,13 +33,19 @@ public class MainActivity extends AppCompatActivity {
 
         String user = Preferences.obtenerPreferenceStringNombre(this, Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
         String correo = Preferences.obtenerPreferenceStringId(this,Preferences.PREFERENCE_USUARIO_LOGIN_ID);
-        String pass = Preferences.obtenerPreferenceStringId(this,Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
+        String pass = Preferences.obtenerPreferenceStringContrasenia(this,Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
 
-        TextView registro= (TextView)findViewById(R.id.RegistroLogin);
-        Button btnlogin = (Button)findViewById(R.id.btnLogin);
+        if(!user.equals("")&& !pass.equals("")){
+            Intent bienvenido = new Intent( MainActivity.this, Bienvenido.class);
+            startActivity(bienvenido);
+            finish();
+        }
 
-        final EditText usuarioT = (EditText)findViewById(R.id.edtUsuario);
-        final EditText claveT = (EditText)findViewById(R.id.edtPassword);
+        TextView registro= findViewById(R.id.RegistroLogin);
+        Button btnlogin = findViewById(R.id.btnLogin);
+
+        final EditText usuarioT = findViewById(R.id.edtUsuario);
+        final EditText claveT = findViewById(R.id.edtPassword);
 
         expandableView = findViewById(R.id.expandableView);
         arrowBtn = findViewById(R.id.arrowBtn);
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                             if ( ok==true ){
 
-                                int idpadre1 = jsonRespuesta.getInt("idpadre");//esto
+                                //int idpadre1 = jsonRespuesta.getInt("idpadre");//esto
                                 String nombre = jsonRespuesta.getString("nombre");
                                 String apellido = jsonRespuesta.getString("apellido");
                                 String direccion = jsonRespuesta.getString("direccion");
@@ -86,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
                                 Preferences.savePreferenceStringNombre(MainActivity.this,
                                         (jsonRespuesta.getString("nombre")+" "+ jsonRespuesta.getString("apellido")),
                                         Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+                                Preferences.savePreferenceStringTelefono(MainActivity.this,jsonRespuesta.getString("telefono"),
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_TELEFONO);
+                                Preferences.savePreferenceStringCorreo(MainActivity.this,jsonRespuesta.getString("correo"),
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_CORREO);
+                                Preferences.savePreferenceStringDireccion(MainActivity.this,jsonRespuesta.getString("direccion"),
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_DIRECCION);
                                 Preferences.savePreferenceStringContrasenia(MainActivity.this,
                                         jsonRespuesta.getString("clave"),
                                         Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
@@ -97,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
                                 bienvenido.putExtra("direccion",direccion);
                                 bienvenido.putExtra("telefono",telefono);
                                 bienvenido.putExtra("correo",correo);
-                                bienvenido.putExtra("idpadre",idpadre1);
-                                MainActivity.this.startActivity(bienvenido);
-                                MainActivity.this.finish();
+                              //  bienvenido.putExtra("idpadre",idpadre1);
+                                startActivity(bienvenido);
+                                //MainActivity.this.finish();
 
                             }
                             else {
@@ -112,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
 
                         } catch (JSONException e){
                             e.getMessage();
+                            AlertDialog.Builder alerta =new AlertDialog.Builder( MainActivity.this);
+                            alerta.setMessage(e.getMessage())
+                                    .setNegativeButton( "Reintentar", null)
+                                    .create()
+                                    .show();
                         }
                     }
 

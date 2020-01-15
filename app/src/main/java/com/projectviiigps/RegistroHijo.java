@@ -45,7 +45,7 @@ public class RegistroHijo extends AppCompatActivity {
         codigo.setText(id_padre);
 
 
-        Toast.makeText(this, "Id_padre: " + id_padre, Toast.LENGTH_LONG).show();
+       // Toast.makeText(this, "Id_padre: " + id_padre, Toast.LENGTH_LONG).show();
 
 
         btnRegistro.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +60,9 @@ public class RegistroHijo extends AppCompatActivity {
                 String apellidoh       = apellido.getText().toString();
                 int    edadh         =  Integer.parseInt( edad.getText().toString());
                 String direccionh    = direccion.getText().toString();
-                String tiposangre    = tiposangreh.getText().toString();;
-                String enfermedad    = enfermedadh.getText().toString();;
-                String alergia    = alergiah.getText().toString();;
+                String tiposangre    = tiposangreh.getText().toString();
+                String enfermedad    = enfermedadh.getText().toString();
+                String alergia    = alergiah.getText().toString();
 
 
 

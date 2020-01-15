@@ -53,7 +53,7 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open
                 , R.string.navigation_drawer_close);
@@ -142,25 +142,25 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
       //  mensaje.setText(mensaje.getText()+"  " + nombre +" Su edad:" + edad + " ");
 
 
-        final TextView mensaje =(TextView)findViewById(R.id.name);
-        final TextView direccion1 =(TextView)findViewById(R.id.direccion);
-        final TextView telefono1 =(TextView)findViewById(R.id.phoneNumber);
-        final TextView correo1 =(TextView)findViewById(R.id.mailNumber);
-        codigo =(TextView)findViewById(R.id.codigopadre);//esto
+        final TextView mensaje =findViewById(R.id.name);
+        final TextView direccion1 =findViewById(R.id.direccion);
+        final TextView telefono1 =findViewById(R.id.phoneNumber);
+        final TextView correo1 =findViewById(R.id.mailNumber);
+        codigo =findViewById(R.id.codigopadre);//esto
 
 
-        String nombre = i.getStringExtra("nombre");
-        String apellido = i.getStringExtra("apellido");
-        String direccion = i.getStringExtra("direccion");
-        int telefono = i.getIntExtra("telefono", -1);
-        String correo = i.getStringExtra("correo");
-        int idpadre=i.getIntExtra("idpadre",-1);//esto
+        String nombre = Preferences.obtenerPreferenceStringNombre(this, Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+        //String apellido = i.getStringExtra("apellido");
+        String direccion = Preferences.obtenerPreferenceStringDireccion(this, Preferences.PREFERENCE_USUARIO_LOGIN_DIRECCION);
+        int telefono = Integer.valueOf(Preferences.obtenerPreferenceStringTelefono(this, Preferences.PREFERENCE_USUARIO_LOGIN_TELEFONO));
+        String correo = Preferences.obtenerPreferenceStringCorreo(this, Preferences.PREFERENCE_USUARIO_LOGIN_CORREO);
+      //  int idpadre=i.getIntExtra("idpadre",-1);//esto
 
-        mensaje.setText(mensaje.getText()+"  " + nombre +"" + apellido + " ");
+        mensaje.setText(mensaje.getText()+"  " + nombre +"");
         direccion1.setText(direccion1.getText()+"  " + direccion);
         telefono1.setText(telefono1.getText()+" "+ telefono);
         correo1.setText(correo1.getText()+" "+ correo);
-        codigo.setText(codigo.getText()+" "+ idpadre);         //esto
+      //  codigo.setText(codigo.getText()+" "+ idpadre);         //esto
 
 
 

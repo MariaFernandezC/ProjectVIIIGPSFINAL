@@ -84,7 +84,7 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        edtnombre.setText(jsonObject.getString("nombrenino"));
+                        edtnombre.setText(jsonObject.getString("nombreh"));
                         edtlatitud.setText(jsonObject.getString("latitud"));
                         edtlongitud.setText(jsonObject.getString("longitud"));
                         Double latitud = Double.parseDouble(edtlatitud.getText().toString());
@@ -94,7 +94,7 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
                         mMap.addMarker(new MarkerOptions().position(latLng).title("Punto. Lat: "+ latitud +", Lon:" + longitud));
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(34));
                     } catch (JSONException e) {
-                        Toast.makeText(localizacion.this, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(localizacion.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
