@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         TextView registro= findViewById(R.id.RegistroLogin);
+        TextView recuperarcontrasena= findViewById(R.id.OlvidoContrasena);
         Button btnlogin = findViewById(R.id.btnLogin);
 
         final EditText usuarioT = findViewById(R.id.edtUsuario);
@@ -63,12 +64,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        recuperarcontrasena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent recuperarcontrase = new Intent (MainActivity.this, RecuperarContrasena.class);
+                MainActivity.this.startActivity(recuperarcontrase);
+                finish();
+            }
+        });
+
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View view) {
                 final String usuario = usuarioT.getText().toString();
                 final String clave = claveT.getText().toString();
+
                 Response.Listener<String> respuesta = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -86,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                 String direccion = jsonRespuesta.getString("direccion");
                                 int telefono = jsonRespuesta.getInt("telefono");
                                 String correo = jsonRespuesta.getString("correo");
+                              ;
 
                                 Preferences.savePreferenceStringId(MainActivity.this,jsonRespuesta.getString("idpadre"),
                                         Preferences.PREFERENCE_USUARIO_LOGIN_ID);
@@ -102,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
                                         jsonRespuesta.getString("clave"),
                                         Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
 
+
+
+
                                 //int edad =jsonRespuesta.getInt("edad");
                                 Intent bienvenido = new Intent( MainActivity.this, Bienvenido.class);
                                 bienvenido.putExtra("nombre",nombre);
@@ -110,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                                 bienvenido.putExtra("telefono",telefono);
                                 bienvenido.putExtra("correo",correo);
                               //  bienvenido.putExtra("idpadre",idpadre1);
+
                                 startActivity(bienvenido);
                                 //MainActivity.this.finish();
 
@@ -139,12 +155,10 @@ public class MainActivity extends AppCompatActivity {
                 LoginRequest r = new LoginRequest(usuario,clave, respuesta);
                 RequestQueue cola = Volley.newRequestQueue( MainActivity.this);
                 cola.add(r);
+
             }
 
         });
-
-
-
 
 
     }

@@ -84,6 +84,19 @@
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
+            <TextView
+                android:id="@+id/OlvidoContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="30dp"
+                android:text="¿Se olvido su contraseña?!"
+                android:textAlignment="center"
+                android:textColor="#1e8449"
+                android:textIsSelectable="false"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
         </LinearLayout>
     </FrameLayout>
 

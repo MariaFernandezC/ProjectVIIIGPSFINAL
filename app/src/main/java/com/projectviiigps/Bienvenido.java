@@ -40,6 +40,7 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
     Intent intent =getIntent();
     int idpadre;
     MenuItem logoutbtn;
+    boolean cargada=false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -50,15 +51,19 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         arrowBtn = findViewById(R.id.arrowBtn);
         cardView = findViewById(R.id.cardView);
 
+
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open
-                , R.string.navigation_drawer_close);
+                , R.string.navigation_drawer_close
+        );
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
 
         NavigationView navView = findViewById(R.id.navview);
         Menu menu = navView.getMenu();
@@ -68,7 +73,6 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         navView.setNavigationItemSelectedListener(this);
 
         logoutbtn = menu.findItem(R.id.btnlogout);
-
 
         View headView = navView.getHeaderView(0);
         ImageView imgProfile = headView.findViewById(R.id.profile_image);
@@ -146,27 +150,40 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         final TextView direccion1 =findViewById(R.id.direccion);
         final TextView telefono1 =findViewById(R.id.phoneNumber);
         final TextView correo1 =findViewById(R.id.mailNumber);
+
         codigo =findViewById(R.id.codigopadre);//esto
 
 
         String nombre = Preferences.obtenerPreferenceStringNombre(this, Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+
         //String apellido = i.getStringExtra("apellido");
         String direccion = Preferences.obtenerPreferenceStringDireccion(this, Preferences.PREFERENCE_USUARIO_LOGIN_DIRECCION);
         int telefono = Integer.valueOf(Preferences.obtenerPreferenceStringTelefono(this, Preferences.PREFERENCE_USUARIO_LOGIN_TELEFONO));
         String correo = Preferences.obtenerPreferenceStringCorreo(this, Preferences.PREFERENCE_USUARIO_LOGIN_CORREO);
       //  int idpadre=i.getIntExtra("idpadre",-1);//esto
 
+
         mensaje.setText(mensaje.getText()+"  " + nombre +"");
         direccion1.setText(direccion1.getText()+"  " + direccion);
         telefono1.setText(telefono1.getText()+" "+ telefono);
         correo1.setText(correo1.getText()+" "+ correo);
+
+
+
       //  codigo.setText(codigo.getText()+" "+ idpadre);         //esto
-
-
 
 
     }
 
+
+   /*/protected void onResume() {
+        super.onResume();
+        final TextView cabeceranombreU= findViewById(R.id.txtusuario1);
+        String nombrecabecera=Preferences.obtenerPreferenceStringNombre(this, Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+        cabeceranombreU.setText(cabeceranombreU.getText()+" "+nombrecabecera+"");
+        cargada = true;
+
+    }/*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -176,6 +193,7 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         if (id == R.id.menu_seccion_1) {
             Intent i = new Intent(Bienvenido.this,Perfil.class);
             startActivity(i);
+
         } else if (id == R.id.menu_seccion_2) {
 
             Intent i = new Intent(Bienvenido.this,RegistroHijo.class);
@@ -194,13 +212,14 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
 
     private void lanzarcodigo ()
     {
-        Intent intent = new Intent(this,RegistroHijo.class);
-        intent.putExtra("idpadre",codigo.getText());
-        startActivity(intent);
+        final TextView cabeceranombreU= findViewById(R.id.txtusuario1);
+        String nombrecabecera=Preferences.obtenerPreferenceStringNombre(this, Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+        cabeceranombreU.setText(cabeceranombreU.getText()+" "+nombrecabecera+"");
     }
 
 

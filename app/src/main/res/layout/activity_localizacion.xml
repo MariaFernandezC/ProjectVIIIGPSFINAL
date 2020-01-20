@@ -8,6 +8,50 @@
     android:orientation="vertical"
     tools:context=".localizacion">
 
+
+    <EditText
+        android:id="@+id/edtlongitud"
+        android:layout_width="13dp"
+        android:layout_height="11dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:focusable="false"
+        android:fontFamily="@font/arizonia"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:text="Longitud"
+        android:textColor="#1e8449"
+        android:textColorHint="#1e8449"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edtlatitud"
+        android:layout_width="7dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:focusable="false"
+        android:fontFamily="@font/arizonia"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:text="Latitud"
+        android:textColor="#1e8449"
+        android:textColorHint="#1e8449"
+        android:textSize="20sp" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,55 +64,36 @@
 
 
         <ImageView
-            android:layout_width="228dp"
-            android:layout_height="129dp"
+            android:layout_width="242dp"
+            android:layout_height="123dp"
             android:contentDescription="TODO"
             android:src="@drawable/projectgps" />
 
+
         <EditText
             android:id="@+id/edtnombrenino"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_width="314dp"
+            android:layout_height="34dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/input"
             android:fontFamily="@font/arizonia"
             android:hint="Nombre del niño"
             android:inputType="text"
             android:paddingLeft="20dp"
-            android:paddingTop="10dp"
+            android:paddingTop="0dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textAlignment="center"
             android:textColor="#1e8449"
             android:textColorHint="#1e8449"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/edtfechalocalizarnino"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/input"
-            android:fontFamily="@font/arizonia"
-            android:hint="Fecha a localizar"
-            android:inputType="date"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:textAlignment="center"
-            android:textColor="#1e8449"
-            android:textColorHint="#1e8449"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btncargar2"
-            android:layout_width="305dp"
-            android:layout_height="31dp"
+            android:layout_width="244dp"
+            android:layout_height="32dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
@@ -77,54 +102,12 @@
             android:text="Cargar datos"
             android:textColor="#FFFFFF" />
 
-        <EditText
-            android:id="@+id/edtlatitud"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/input"
-            android:ems="10"
-            android:focusable="false"
-            android:fontFamily="@font/arizonia"
-            android:inputType="number"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:text="Latitud"
-            android:textColor="#1e8449"
-            android:textColorHint="#1e8449"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/edtlongitud"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/input"
-            android:ems="10"
-            android:focusable="false"
-            android:fontFamily="@font/arizonia"
-            android:inputType="number"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:text="Longitud"
-            android:textColor="#1e8449"
-            android:textColorHint="#1e8449"
-            android:textSize="20sp" />
-
 
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="476dp"
             tools:context=".localizacion" />
 
 
