@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView registro= findViewById(R.id.RegistroLogin);
         TextView recuperarcontrasena= findViewById(R.id.OlvidoContrasena);
+
         Button btnlogin = findViewById(R.id.btnLogin);
 
         final EditText usuarioT = findViewById(R.id.edtUsuario);
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override

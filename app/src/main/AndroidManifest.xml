@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RecuperarContrasena"></activity>
+        <activity android:name=".ActualizarDatos"></activity>
+        <activity android:name=".RecuperarContrasena" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

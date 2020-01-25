@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,7 +36,7 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-
+        final TextView regresoIncioSesion = findViewById(R.id.btn_ir_inicioSesion);
         final EditText nombret              = findViewById(R.id.RegistroNombres);
         final EditText apellidost              = findViewById(R.id.RegistroApellidos);
         final EditText cedulat              = findViewById(R.id.RegistroCedula);
@@ -46,6 +47,15 @@ public class Registro extends AppCompatActivity {
         final EditText usuariot             = findViewById(R.id.RegistroUsuario);
         final EditText clavet               = findViewById(R.id.RegistroContrasena);
         Button btnRegistro                  = findViewById(R.id.btnRegistro);
+
+        regresoIncioSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Registro.this, MainActivity.class);
+                Registro.this.startActivity(i);
+                Registro.this.finish();
+            }
+        });
 
 
         btnRegistro.setOnClickListener(new OnClickListener() {

@@ -208,6 +208,10 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
             Intent i = new Intent(Bienvenido.this,Reportes.class);
             startActivity(i);
         }
+        else if (id == R.id.btnactualizar) {
+        Intent i = new Intent(Bienvenido.this,ActualizarDatos.class);
+        startActivity(i);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
